@@ -8,18 +8,17 @@ def dist_euclidiana(x1, y1, x2, y2):
 def gerar_populacao(n):
     populacao = []
     #Gerando string de A até Z, para escolhermos um índice aleatório da string como objeto
-    objetos = ''.join([chr(i) for i in range(65, 65 + n)])
+    objetos = ''.join([chr(i) for i in range(65, 90)])
     for _ in range(n):
-        #Gerando uma solução candidata aleatória
-        solucao = ''.join(random.sample(objetos, n))
+        #Gerando um objeto aleatório
+        solucao = ''.join(random.sample(objetos, 1))
         #Gerando as coordenadas para cada objeto
-        coordenadas = [(random.randint(0, 30), random.randint(0, 30)) for _ in range(n)]
+        coordenadas = (random.randint(0, 30), random.randint(0, 30))
         populacao.append((solucao, coordenadas))
     return populacao
 
-def gerar_matrizes(n):
-    # Gera coordenadas fixas para os locais (não para os indivíduos!)
-    locais = [(random.randint(0, 30), random.randint(0, 30)) for _ in range(n)]
+def gerar_matrizes(n, populacao):
+    locais = [coordenadas for _, coordenadas in populacao]
     
     # Matriz de distância entre locais (baseada nas coordenadas)
     matriz_distancia = [[0] * n for _ in range(n)]
@@ -46,12 +45,12 @@ def print_matriz(matriz):
 
 if __name__ == '__main__':
     n = 5
-    matriz_distancia, matriz_fluxo = gerar_matrizes(n)
+    print('População:')
+    populacao = gerar_populacao(n)
+    matriz_distancia, matriz_fluxo = gerar_matrizes(n, populacao)
     print('Matriz de distância:')
     print_matriz(matriz_distancia)
     print('Matriz de fluxo:')
     print_matriz(matriz_fluxo)
-    print('População:')
-    populacao = gerar_populacao(n)
     for i, (solucao, coordenadas) in enumerate(populacao):
         print(i, solucao, coordenadas)

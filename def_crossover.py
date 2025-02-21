@@ -20,7 +20,12 @@ def crossover_dois_pontos(populacao):
         pai1 = populacao[i]
         pai2 = populacao[i+1]
 
-        ponto_corte1 = random.randint(1, len(pai1[1])-2)
+        if len(pai1[1]) < 2:
+            # Se não tiver, apenas copia os pais para a nova população
+            nova_populacao.extend([pai1, pai2])
+            continue
+
+        ponto_corte1 = random.randint(1, len(pai1[1])-1)
         ponto_corte2 = random.randint(ponto_corte1, len(pai1[1])-1)
 
         filho1 = (pai1[0], pai1[1][:ponto_corte1] + pai2[1][ponto_corte1:ponto_corte2] + pai1[1][ponto_corte2:])

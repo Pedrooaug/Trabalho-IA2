@@ -63,5 +63,3 @@ if __name__ == '__main__':
     tamanho_populacao = 10
     num_geracoes = 10
     algoritmo_genetico(matriz_distancia, matriz_fluxo, tamanho_populacao, num_geracoes, fitness, selecao, crossover, elitismo, mutacao)
-    
-

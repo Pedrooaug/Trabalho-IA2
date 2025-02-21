@@ -11,7 +11,7 @@ def selecao_roleta(populacao, fitness):
 
     return selecionados
 
-def selecao_torneio(populacao, fitness, k=3):
+def selecao_torneio(populacao, fitness, k=2):
     # k é a quantidade de competidores que vão participar do torneio, 
     # coloquei 3 só porque sim mesmo
     selecionados = []

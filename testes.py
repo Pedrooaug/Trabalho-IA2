@@ -8,10 +8,11 @@ def main():
         ("Ind1", (1, 2)),
         ("Ind2", (3, 4)),
         ("Ind3", (5, 6)),
-        ("Ind4", (7, 8))
+        ("Ind4", (7, 8)),
+        ("Ins5", (6, 9))
     ]
 
-    fitness = [0.1, 0.3, 0.2, 0.4]  
+    fitness = [0.1, 0.3, 0.2, 0.4, 0.4]  
 
     print("População Inicial:")
     for ind in populacao:
@@ -37,12 +38,6 @@ def main():
     populacao_crossover_um_ponto = crossover_um_ponto(populacao_selecionada_roleta)
     print("\nPopulação após Crossover de Um Ponto:")
     for ind in populacao_crossover_um_ponto:
-        print(ind)
-
-    # Teste do Crossover Uniforme
-    populacao_crossover_uniforme = crossover_uniforme(populacao_selecionada_torneio)
-    print("\nPopulação após Crossover Uniforme:")
-    for ind in populacao_crossover_uniforme:
         print(ind)
 
     # Teste do Crossover Uniforme

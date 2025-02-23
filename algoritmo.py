@@ -29,20 +29,21 @@ import random
 #Passaremos por parâmetro a matriz de distâncias, a matriz de fluxo, a população, o número de gerações, a função de fitness, a função de seleção, a função de crossover, a função de elitismo e a função de mutação
 #A estrutura do algoritmo é baseada na chamada das funções passadas por parâmetro, sendo elas o crossover, a seleção, a mutação e o elitismo
 
-def algoritmo_genetico(matriz_distancia, matriz_fluxo, populacao, num_geracoes, fitness, selecao, crossover, elitismo, mutacao):
-    for geracao in range(num_geracoes):
-        #Calculando o fitness de cada indivíduo
-        fitness_populacao = [fitness(individuo, matriz_distancia, matriz_fluxo) for individuo in populacao]
-        #Selecionando os indivíduos para a próxima geração
-        populacao_selecionada = selecao(populacao, fitness_populacao)
-        #Realizando o crossover
-        populacao_crossover = crossover(populacao_selecionada)
-        #Realizando a mutação
-        populacao_mutada = mutacao(populacao_crossover)
-        #Realizando o elitismo
-        populacao = elitismo(populacao_mutada, fitness_populacao)
-    return populacao
+def algoritmo_genetico(populacao, n_geracoes, fitness, selecao, crossover, elitismo, mutacao):
+    for _ in range(n_geracoes):
+        # Seleciona os indivíduos para reprodução
+        selecionados = selecao(populacao, fitness)
+        
+        # Realiza o crossover
+        filhos = crossover(selecionados)
+        
+        # Realiza a mutação
+        filhos_mutados = mutacao(filhos)
+        
+        # Realiza o elitismo
+        populacao = elitismo(populacao, filhos_mutados)
 
+    return populacao
 
 #Função de fitness
 #O fitness é calculado como a multiplicação do valor da matriz de distância pelo valor da matriz de fluxo do indivíduo
@@ -69,6 +70,13 @@ def fitness(individuo, locais_fixos, matriz_distancia, matriz_fluxo):
             custo += matriz_fluxo[i][j] * matriz_distancia[local_i][local_j]
     
     return custo
+
+#Retornando o fitness como lista 
+def lista_fitness(populacao, locais_fixos, matriz_distancia, matriz_fluxo):
+    fitness_populacao = []
+    for i in range(len(populacao)):
+        fitness_populacao.append(fitness(populacao[i], locais_fixos, matriz_distancia, matriz_fluxo))
+    return fitness_populacao
 
 def main():
     n = 5
@@ -101,4 +109,3 @@ def main():
 
 if __name__ == '__main__':
     main()    
-

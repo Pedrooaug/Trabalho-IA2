@@ -42,3 +42,37 @@ def crossover_dois_pontos(populacao):
             nova_populacao.append(populacao[i])
     
     return nova_populacao
+
+def crossover_uniforme(populacao):
+    nova_populacao = []
+    
+    for i in range(0, len(populacao) - 1, 2):
+        pai1 = populacao[i]
+        pai2 = populacao[i + 1]
+
+        filho1 = (pai1[0], tuple(random.choice([pai1[1][j], pai2[1][j]]) for j in range(len(pai1[1]))))
+        filho2 = (pai2[0], tuple(random.choice([pai1[1][j], pai2[1][j]]) for j in range(len(pai1[1]))))
+
+        nova_populacao.extend([filho1, filho2])
+    
+    if len(populacao) % 2 != 0:
+        nova_populacao.append(populacao[-1])
+    
+    return nova_populacao
+
+def crossover_aritmetico(populacao, alpha=0.5):
+    nova_populacao = []
+    
+    for i in range(0, len(populacao) - 1, 2):
+        pai1 = populacao[i]
+        pai2 = populacao[i + 1]
+
+        filho1 = (pai1[0], tuple(alpha * pai1[1][j] + (1 - alpha) * pai2[1][j] for j in range(len(pai1[1]))))
+        filho2 = (pai2[0], tuple(alpha * pai2[1][j] + (1 - alpha) * pai1[1][j] for j in range(len(pai1[1]))))
+
+        nova_populacao.extend([filho1, filho2])
+    
+    if len(populacao) % 2 != 0:
+        nova_populacao.append(populacao[-1])
+    
+    return nova_populacao

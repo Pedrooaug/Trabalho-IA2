@@ -43,14 +43,14 @@ def algoritmo_genetico(populacao, n_geracoes, fitness, selecao, crossover, eliti
         novos = n[:len(populacao)]
 
         # Realiza a mutação
-        #filhos_mutados = mutacao(novos)
-        populacao = novos
+        filhos_mutados = mutacao(novos)
+        populacao = filhos_mutados
         print(f"Geração {i}:")
         for j, individuo in enumerate(populacao):
             print(f'Indivíduo {j}: {individuo}')
         
         # Realiza o elitismo
-        #sobreviventes = elitismo(populacao, filhos_mutados)
+        sobreviventes = elitismo(populacao, filhos_mutados)
 
     return populacao
 
@@ -88,7 +88,7 @@ def lista_fitness(populacao, locais_fixos, matriz_distancia, matriz_fluxo):
     return fitness_populacao
 
 def main():
-    n = 5
+    n = 10
     # Gera locais fixos e instalações UMA ÚNICA VEZ
     locais_fixos = gerar_locais(n)
     instalacoes = gerar_instalacoes(n)
@@ -104,17 +104,17 @@ def main():
     for i, individuo in enumerate(populacao):
         print(f'Indivíduo {i}: {individuo}')
     
-    print("\nMatriz de distância:")
-    for linha in matriz_distancia:
-        print(linha)
+    #print("\nMatriz de distância:")
+    #for linha in matriz_distancia:
+        #print(linha)
     
-    print("\nMatriz de fluxo:")
-    for linha in matriz_fluxo:
-        print(linha)
+    #print("\nMatriz de fluxo:")
+    #for linha in matriz_fluxo:
+        #print(linha)
     
     # Testa o fitness dos indivíduos
-    for i, individuo in enumerate(populacao):
-        print(f'Fitness do indivíduo {individuo}: {fitness(individuo, locais_fixos, matriz_distancia, matriz_fluxo)}')
+    #for i, individuo in enumerate(populacao):
+        #print(f'Fitness do indivíduo {individuo}: {fitness(individuo, locais_fixos, matriz_distancia, matriz_fluxo)}')
 
     # Testa o algoritmo genetico
     n_geracoes = 10

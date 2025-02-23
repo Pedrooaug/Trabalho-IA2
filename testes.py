@@ -54,7 +54,6 @@ def main():
     for i, filho in enumerate(filhos_um_ponto):
         print(f'Filho {i}: {filho}')
 
-
     # Teste do Crossover de dois pontos
     print("\nCrossover de dois pontos:")
     filhos_dois_pontos = crossover_dois_pontos(selecionados_roleta)
@@ -72,7 +71,6 @@ def main():
     filhos_mutados_novo_valor = mutacao_novo_valor(filhos_um_ponto)
     for i, filho in enumerate(filhos_mutados_novo_valor):
         print(f'Filho {i}: {filho}')
-
 
     # Teste do Elitismo Simples
     print("\nElitismo Simples:")

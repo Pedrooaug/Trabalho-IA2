@@ -29,6 +29,7 @@ import random
 #Passaremos por parâmetro a matriz de distâncias, a matriz de fluxo, a população, o número de gerações, a função de fitness, a função de seleção, a função de crossover, a função de elitismo e a função de mutação
 #A estrutura do algoritmo é baseada na chamada das funções passadas por parâmetro, sendo elas o crossover, a seleção, a mutação e o elitismo
 
+
 def algoritmo_genetico(populacao, n_geracoes, gerar_fitness, selecao, crossover, elitismo, mutacao, locais_fixos, matriz_distancia, matriz_fluxo):
     sobreviventes = []
     for i in range(n_geracoes):
@@ -48,7 +49,9 @@ def algoritmo_genetico(populacao, n_geracoes, gerar_fitness, selecao, crossover,
         populacao = filhos_mutados
         print(f"Geração {i}:")
         for j, individuo in enumerate(populacao):
-            print(f'Indivíduo {j}: {individuo}')
+
+            print(f'Indivíduo {j}: {individuo}, fitness: {fitness[j]}')
+
         
         # Realiza o elitismo
         sobreviventes = elitismo(populacao, filhos_mutados)
@@ -122,6 +125,7 @@ def main():
 
     # Testa o algoritmo genetico
     n_geracoes = 10
+
     sobreviventes = algoritmo_genetico(populacao, n_geracoes, lista_fitness, selecao_roleta, crossover_um_ponto, elitismo_simples, mutacao_swap, locais_fixos, matriz_distancia, matriz_fluxo)
     print("\nSobreviventes:")
     for i, individuo in enumerate(sobreviventes):

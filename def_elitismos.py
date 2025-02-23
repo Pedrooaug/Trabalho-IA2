@@ -10,7 +10,7 @@ def simples(populacao, fitness):
     '''
     zipado = list(zip(populacao, fitness))
     zipado.sort(key=lambda x: x[1])
-    return [x[0] for x in zipado[len(populacao)//2:]]
+    return [x[0] for x in zipado[:len(populacao)//2]]
 
 def composto(populacao, fitness):
     '''
@@ -26,12 +26,13 @@ def composto(populacao, fitness):
     '''
     zipado = list(zip(populacao, fitness))
     zipado.sort(key=lambda x: x[1])
-    melhores = [x[0] for x in zipado[len(populacao)//4:]]
+    melhores = [x[0] for x in zipado[:(len(populacao)//4)]]
     metade = len(populacao) // 2
     selecionados = set(melhores)
     while len(selecionados) < metade:
-        selecionados.add(random.choice(populacao)[1])
-    return [populacao[i] for i in selecionados]
+        selecionados.add(random.choice(populacao))
+    
+    return list(selecionados)
 
 def elitismo_simples(populacao, fitness):
     '''
@@ -62,3 +63,4 @@ def elitismo_composto(populacao, fitness):
     for individuo in populacao:
         selecionados.append(composto(individuo, fitness))
     return selecionados
+    

@@ -1,17 +1,13 @@
 import random
 from def_elitismos import elitismo_simples
 from def_selecao import selecao_roleta, selecao_torneio
-from def_crossover import crossover_um_ponto, crossover_uniforme, crossover_dois_pontos
+from def_crossover import crossover_um_ponto, crossover_dois_pontos
+from def_matrizes import gerar_populacao
 
 def main():
-    populacao = [
-        ("Ind1", (1, 2)),
-        ("Ind2", (3, 4)),
-        ("Ind3", (5, 6)),
-        ("Ind4", (7, 8))
-    ]
+    populacao = gerar_populacao(5)
+    fitness = [0.1, 0.3, 0.2, 0.4, 0.5]  
 
-    fitness = [0.1, 0.3, 0.2, 0.4]  
 
     print("População Inicial:")
     for ind in populacao:
@@ -44,8 +40,7 @@ def main():
     print("\nPopulação após Crossover Uniforme:")
     for ind in populacao_crossover_uniforme:
         print(ind)
-
-    # Teste do Crossover Uniforme
+        
     populacao_crossover_dois_pontos = crossover_dois_pontos(populacao_selecionada_torneio)
     print("\nPopulação após Crossover de Dois Pontos:")
     for ind in populacao_crossover_dois_pontos:

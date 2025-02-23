@@ -29,10 +29,11 @@ import random
 #Passaremos por parâmetro a matriz de distâncias, a matriz de fluxo, a população, o número de gerações, a função de fitness, a função de seleção, a função de crossover, a função de elitismo e a função de mutação
 #A estrutura do algoritmo é baseada na chamada das funções passadas por parâmetro, sendo elas o crossover, a seleção, a mutação e o elitismo
 
-def algoritmo_genetico(populacao, n_geracoes, fitness, selecao, crossover, elitismo, mutacao):
+def algoritmo_genetico(populacao, n_geracoes, gerar_fitness, selecao, crossover, elitismo, mutacao, locais_fixos, matriz_distancia, matriz_fluxo):
     sobreviventes = []
     for i in range(n_geracoes):
         # Seleciona os indivíduos para reprodução
+        fitness = gerar_fitness(populacao, locais_fixos, matriz_distancia, matriz_fluxo)
         selecionados = selecao(populacao, fitness)
         
         # Realiza o crossover
@@ -54,6 +55,9 @@ def algoritmo_genetico(populacao, n_geracoes, fitness, selecao, crossover, eliti
 
     return populacao
 
+def gerar_instalacoes2(individuo):
+    return [instalacao for instalacao, local in individuo]
+
 #Função de fitness
 #O fitness é calculado como a multiplicação do valor da matriz de distância pelo valor da matriz de fluxo do indivíduo
 #Para isso, precisamos encontrar o índice de cada indivíduo na matriz de distância e na matriz de fluxo
@@ -65,7 +69,7 @@ def algoritmo_genetico(populacao, n_geracoes, fitness, selecao, crossover, eliti
 def fitness(individuo, locais_fixos, matriz_distancia, matriz_fluxo):
     custo = 0
     n = len(individuo)
-    instalacoes = gerar_instalacoes(n)
+    instalacoes = gerar_instalacoes2(individuo)
     # Cria um dicionário para mapear instalações para seus locais no indivíduo
     mapa = {obj: idx_local for obj, idx_local in individuo}
     
@@ -118,10 +122,14 @@ def main():
 
     # Testa o algoritmo genetico
     n_geracoes = 10
-    sobreviventes = algoritmo_genetico(populacao, n_geracoes, lista_fitness(populacao, locais_fixos, matriz_distancia, matriz_fluxo), selecao_roleta, crossover_um_ponto, elitismo_simples, mutacao_swap)
+    sobreviventes = algoritmo_genetico(populacao, n_geracoes, lista_fitness, selecao_roleta, crossover_um_ponto, elitismo_simples, mutacao_swap, locais_fixos, matriz_distancia, matriz_fluxo)
     print("\nSobreviventes:")
     for i, individuo in enumerate(sobreviventes):
         print(f'Indivíduo {i}: {individuo}')
+    print("\nFitness dos sobreviventes:")
+    lista_fitness_sobreviventes = lista_fitness(sobreviventes, locais_fixos, matriz_distancia, matriz_fluxo)
+    for i, fitness in enumerate(lista_fitness_sobreviventes):
+        print(f'Fitness do indivíduo {i}: {fitness}')
 
 if __name__ == '__main__':
     main()    

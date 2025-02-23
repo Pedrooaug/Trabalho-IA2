@@ -45,12 +45,12 @@ def print_matriz(matriz):
 
 if __name__ == '__main__':
     n = 5
-    matriz_distancia, matriz_fluxo = gerar_matrizes(n)
+    print('População:')
+    populacao = gerar_populacao(n)
+    matriz_distancia, matriz_fluxo = gerar_matrizes(n, populacao)
     print('Matriz de distância:')
     print_matriz(matriz_distancia)
     print('Matriz de fluxo:')
     print_matriz(matriz_fluxo)
-    print('População:')
-    populacao = gerar_populacao(n)
     for i, (solucao, coordenadas) in enumerate(populacao):
         print(i, solucao, coordenadas)

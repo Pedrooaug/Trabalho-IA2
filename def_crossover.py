@@ -4,6 +4,7 @@ def crossover_um_ponto(populacao):
     nova_populacao = []
     
     for i in range(0, len(populacao) - 1, 2):  
+
         pai1 = populacao[i]
         pai2 = populacao[i + 1]
 
@@ -17,7 +18,7 @@ def crossover_um_ponto(populacao):
     
     if len(populacao) % 2 != 0:
         nova_populacao.append(populacao[-1])
-    
+     
     return nova_populacao
 
 def crossover_dois_pontos(populacao):

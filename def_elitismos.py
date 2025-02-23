@@ -40,4 +40,5 @@ def elitismo_composto(populacao, fitness):
         if populacao[i] not in melhores:
             melhores.append(populacao[i])
 
+
     return melhores

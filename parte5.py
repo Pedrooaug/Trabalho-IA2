@@ -16,7 +16,7 @@ from def_crossover import crossover_um_ponto, crossover_dois_pontos
 import time
 
 def main():
-    for n in range(10, 100, 1000):
+    for n in range(10, 1000, 100):
         # Gera locais fixos e instalações
         locais_fixos = gerar_locais(n)
         instalacoes = gerar_instalacoes(n)

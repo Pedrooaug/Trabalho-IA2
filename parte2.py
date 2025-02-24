@@ -25,9 +25,8 @@ def main():
         matriz_distancia, matriz_fluxo = gerar_matrizes(locais_fixos, instalacoes)
 
         # Executa o algoritmo genético com crossover de um ponto
-        fitness_pop = lista_fitness(populacao, locais_fixos, matriz_distancia, matriz_fluxo)
         print("\nExecutando algoritmo genético com crossover de um ponto...")
-        populacao_um_ponto = algoritmo_genetico(populacao, num_geracoes, fitness_pop, selecao_roleta, crossover_um_ponto, elitismo_simples, mutacao_swap)
+        populacao_um_ponto = algoritmo_genetico(populacao, num_geracoes, lista_fitness, selecao_roleta, crossover_um_ponto, elitismo_simples, mutacao_swap,locais_fixos, matriz_distancia, matriz_fluxo)
         fitness_final = lista_fitness(populacao_um_ponto, locais_fixos, matriz_distancia, matriz_fluxo)
         print("Exibindo o melhor indivíduo encontrado e seu fitness:")
         print(f"Melhor indivíduo: {populacao_um_ponto[0]}")
@@ -35,7 +34,7 @@ def main():
 
         # Versão 2: Crossover de dois pontos
         print("\nExecutando algoritmo genético com crossover de dois pontos...")
-        populacao_dois_pontos = algoritmo_genetico(populacao, num_geracoes, fitness_pop, selecao_roleta, crossover_dois_pontos, elitismo_simples, mutacao_swap)
+        populacao_dois_pontos = algoritmo_genetico(populacao, num_geracoes, lista_fitness, selecao_roleta, crossover_dois_pontos, elitismo_simples, mutacao_swap,locais_fixos, matriz_distancia, matriz_fluxo)
         fitness_final = lista_fitness(populacao_dois_pontos, locais_fixos, matriz_distancia, matriz_fluxo)
         print("Exibindo o melhor indivíduo encontrado e seu fitness:")
         print(f"Melhor indivíduo: {populacao_dois_pontos[0]}")

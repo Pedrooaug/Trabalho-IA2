@@ -16,7 +16,6 @@ def elitismo_simples(populacao, fitness):
 
     zipado.sort(key=lambda x: x[1]) # ordena as soluções pelo fitness em ordem decrescente
 
-    #print(zipado[0][0])
     selecionados = zipado[:len(populacao)//2] # seleciona as soluções com os melhores fitness
     return [x[0] for x in selecionados]
 
@@ -41,6 +40,5 @@ def elitismo_composto(populacao, fitness):
         i = random.randint(0, len(populacao)-1)
         if populacao[i] not in melhores:
             melhores.append(populacao[i])
-
 
     return melhores

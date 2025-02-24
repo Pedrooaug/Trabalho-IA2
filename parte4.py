@@ -7,7 +7,7 @@ from def_matrizes import gerar_populacao, gerar_instalacoes, gerar_locais, gerar
 from algoritmo import algoritmo_genetico, lista_fitness
 from def_selecao import selecao_roleta, selecao_torneio
 from def_elitismos import elitismo_simples, elitismo_composto
-from def_mutacoes import mutacao_swap, mutacao_novo_valor
+from def_mutacoes import mutacao_swap, mutacao_reverso
 from def_crossover import crossover_um_ponto, crossover_dois_pontos
 from algoritmo import algoritmo_genetico, lista_fitness
 
@@ -28,7 +28,7 @@ def main():
         # Executa o algoritmo genético com mutação swap
         fitness_pop = lista_fitness(populacao, locais_fixos, matriz_distancia, matriz_fluxo)
         print("\nExecutando algoritmo genético com mutação swap...")
-        populacao_swap = algoritmo_genetico(populacao, num_geracoes, fitness_pop, selecao_roleta, crossover_um_ponto, elitismo_simples, mutacao_swap)
+        populacao_swap = algoritmo_genetico(populacao, num_geracoes, lista_fitness, selecao_roleta, crossover_um_ponto, elitismo_simples, mutacao_swap, locais_fixos, matriz_distancia, matriz_fluxo)
         fitness_final = lista_fitness(populacao_swap, locais_fixos, matriz_distancia, matriz_fluxo)
         print("Exibindo o melhor indivíduo encontrado e seu fitness:")
         print(f"Melhor indivíduo: {populacao_swap[0]}")
@@ -36,7 +36,7 @@ def main():
 
         # Versão 2: Mutação Novo Valor
         print("\nExecutando algoritmo genético com mutação novo valor...")
-        populacao_novo_valor = algoritmo_genetico(populacao, num_geracoes, fitness_pop, selecao_roleta, crossover_um_ponto, elitismo_simples, mutacao_novo_valor)
+        populacao_novo_valor = algoritmo_genetico(populacao, num_geracoes, lista_fitness, selecao_roleta, crossover_um_ponto, elitismo_simples, mutacao_reverso, locais_fixos, matriz_distancia, matriz_fluxo)
         fitness_final = lista_fitness(populacao_novo_valor, locais_fixos, matriz_distancia, matriz_fluxo)
         print("Exibindo o melhor indivíduo encontrado e seu fitness:")
         print(f"Melhor indivíduo: {populacao_novo_valor[0]}")

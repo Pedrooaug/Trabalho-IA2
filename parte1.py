@@ -34,9 +34,8 @@ def main():
         matriz_distancia, matriz_fluxo = gerar_matrizes(locais_fixos, instalacoes)
 
         # Executa o algoritmo genético com seleção por Roleta
-        fitness_pop = lista_fitness(populacao, locais_fixos, matriz_distancia, matriz_fluxo)
         print("\nExecutando algoritmo genético com seleção por Roleta...")
-        populacao_roleta = algoritmo_genetico(populacao, num_geracoes, fitness_pop, selecao_roleta, crossover_um_ponto, elitismo_simples, mutacao_swap)
+        populacao_roleta = algoritmo_genetico(populacao, num_geracoes, lista_fitness, selecao_roleta, crossover_um_ponto, elitismo_simples, mutacao_swap,locais_fixos, matriz_distancia, matriz_fluxo)
         fitness_final = lista_fitness(populacao_roleta, locais_fixos, matriz_distancia, matriz_fluxo)
         print("Exibindo o melhor indivíduo encontrado e seu fitness:")
         print(f"Melhor indivíduo: {populacao_roleta[0]}")
@@ -44,7 +43,7 @@ def main():
 
         # Versão 2: Seleção por Torneio
         print("\nExecutando algoritmo genético com seleção por Torneio...")
-        populacao_torneio = algoritmo_genetico(populacao, num_geracoes, fitness_pop, selecao_torneio, crossover_um_ponto, elitismo_simples, mutacao_swap)
+        populacao_torneio = algoritmo_genetico(populacao, num_geracoes, lista_fitness, selecao_torneio, crossover_um_ponto, elitismo_simples, mutacao_swap, locais_fixos, matriz_distancia, matriz_fluxo)
         fitness_final = lista_fitness(populacao_torneio, locais_fixos, matriz_distancia, matriz_fluxo)
         print("Exibindo o melhor indivíduo encontrado e seu fitness:")
         print(f"Melhor indivíduo: {populacao_torneio[0]}")

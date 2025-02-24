@@ -32,9 +32,10 @@ import random
 
 def algoritmo_genetico(populacao, n_geracoes, gerar_fitness, selecao, crossover, elitismo, mutacao, locais_fixos, matriz_distancia, matriz_fluxo):
     sobreviventes = []
+    fitness = gerar_fitness(populacao, locais_fixos, matriz_distancia, matriz_fluxo)
     for i in range(n_geracoes):
+        print(f"Geração {i}:")
         # Seleciona os indivíduos para reprodução
-        fitness = gerar_fitness(populacao, locais_fixos, matriz_distancia, matriz_fluxo)
         selecionados = selecao(populacao, fitness)
         
         # Realiza o crossover
@@ -47,19 +48,24 @@ def algoritmo_genetico(populacao, n_geracoes, gerar_fitness, selecao, crossover,
         # Realiza a mutação
         filhos_mutados = mutacao(novos)
         populacao = filhos_mutados
-        print(f"Geração {i}:")
+        fitness = gerar_fitness(populacao, locais_fixos, matriz_distancia, matriz_fluxo)
+        
         for j, individuo in enumerate(populacao):
 
             print(f'Indivíduo {j}: {individuo}, fitness: {fitness[j]}')
 
         
         # Realiza o elitismo
-        sobreviventes = elitismo(populacao, filhos_mutados)
+        sobreviventes = elitismo(populacao, fitness)
 
     return populacao
 
 def gerar_instalacoes2(individuo):
-    return [instalacao for instalacao, local in individuo]
+    instalacoes = []
+    for instalacao in individuo:
+        #print(len(instalacao))
+        instalacoes.append(instalacao[0])
+    return instalacoes
 
 #Função de fitness
 #O fitness é calculado como a multiplicação do valor da matriz de distância pelo valor da matriz de fluxo do indivíduo

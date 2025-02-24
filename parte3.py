@@ -25,9 +25,8 @@ def main():
         matriz_distancia, matriz_fluxo = gerar_matrizes(locais_fixos, instalacoes)
 
         # Executa o algoritmo genético com elitismo simples
-        fitness_pop = lista_fitness(populacao, locais_fixos, matriz_distancia, matriz_fluxo)
         print("\nExecutando algoritmo genético com elitismo simples...")
-        populacao_simples = algoritmo_genetico(populacao, num_geracoes, fitness_pop, selecao_roleta, crossover_um_ponto, elitismo_simples, mutacao_swap)
+        populacao_simples = algoritmo_genetico(populacao, num_geracoes, lista_fitness, selecao_roleta, crossover_um_ponto, elitismo_simples, mutacao_swap, locais_fixos, matriz_distancia, matriz_fluxo)
         fitness_final = lista_fitness(populacao_simples, locais_fixos, matriz_distancia, matriz_fluxo)
         print("Exibindo o melhor indivíduo encontrado e seu fitness:")
         print(f"Melhor indivíduo: {populacao_simples[0]}")
@@ -35,7 +34,7 @@ def main():
 
         # Versão 2: Elitismo Composto
         print("\nExecutando algoritmo genético com elitismo composto...")
-        populacao_composto = algoritmo_genetico(populacao, num_geracoes, fitness_pop, selecao_roleta, crossover_um_ponto, elitismo_composto, mutacao_swap)
+        populacao_composto = algoritmo_genetico(populacao, num_geracoes, lista_fitness, selecao_roleta, crossover_um_ponto, elitismo_composto, mutacao_swap, locais_fixos, matriz_distancia, matriz_fluxo)
         fitness_final = lista_fitness(populacao_composto, locais_fixos, matriz_distancia, matriz_fluxo)
         print("Exibindo o melhor indivíduo encontrado e seu fitness:")
         print(f"Melhor indivíduo: {populacao_composto[0]}")

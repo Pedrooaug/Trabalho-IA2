@@ -34,11 +34,11 @@ def elitismo_composto(populacao, fitness):
     zipado = list(zip(populacao, fitness))
     zipado.sort(key=lambda x: x[1])
     melhores = zipado[:len(populacao)//4] # seleciona os 1/4 melhores
+    melhores = [x[0] for x in melhores]
     metade = len(populacao) // 2
     while len(melhores) < metade:
          #seleciona aleatoriamente os outros 1/4
         i = random.randint(0, len(populacao)-1)
         if populacao[i] not in melhores:
             melhores.append(populacao[i])
-
     return melhores
